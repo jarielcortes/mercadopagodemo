@@ -22,7 +22,7 @@ public class CardPaymentService {
 
   public PaymentResponseDTO processPayment(CardPaymentDTO cardPaymentDTO) {
     try {
-      String mercadoPagoAccessToken = "TEST-8486303170090859-022114-b9cc3e47a50387392220b13676781239-1302162091";
+      String mercadoPagoAccessToken = "";
       MercadoPagoConfig.setAccessToken(mercadoPagoAccessToken);
 
       PaymentClient paymentClient = new PaymentClient();

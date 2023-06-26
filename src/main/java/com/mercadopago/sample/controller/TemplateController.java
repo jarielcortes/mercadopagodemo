@@ -12,7 +12,7 @@ public class TemplateController {
 
     @GetMapping
     public String renderMainPage(Model model) {
-        String mercadoPagoSamplePublicKey = "TEST-6ff32754-d32e-4bc7-b5db-e11e7bbcb786";
+        String mercadoPagoSamplePublicKey = "";
         model.addAttribute("publicKey", mercadoPagoSamplePublicKey);
         return "index";
     }
