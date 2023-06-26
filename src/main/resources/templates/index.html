@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Integration Example - Card Payment</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}" defer></script>
+    <style>
+        #form-checkout {
+          display: flex;
+          flex-direction: column;
+          max-width: 600px;
+        }
+    
+        .container {
+          height: 18px;
+          display: inline-block;
+          border: 1px solid rgb(118, 118, 118);
+          border-radius: 2px;
+          padding: 1px 2px;
+        }
+      </style>
+</head>
+<body>
+<main>
+    <input type="hidden" id="mercado-pago-public-key" th:value="${publicKey}" />
+
+    <!-- Shopping Cart -->
+    <section class="shopping-cart dark">
+        <div class="row" style="margin-left:30px; margin-top:30px">
+            <form id="form-checkout" onsubmit="return false;">
+                <div id="form-checkout__cardNumber" class="container"></div>
+                <div id="form-checkout__expirationDate" class="container"></div>
+                <div id="form-checkout__securityCode" class="container"></div>
+                <input type="text" id="form-checkout__cardholderName" placeholder="Titular de la tarjeta" />
+                <select id="form-checkout__issuer" name="issuer">
+                  <option value="" disabled selected>Banco emisor</option>
+                </select>
+                <select id="form-checkout__installments" name="installments">
+                  <option value="" disabled selected>Cuotas</option>
+                </select>
+                <input type="email" id="form-checkout__email" name="email" placeholder="E-mail" />
+                <input type="input" id="form-checkout__total" name="total" placeholder="Total" />
+            
+                <input id="token" name="token" type="hidden">
+                <input id="paymentMethodId" name="paymentMethodId" type="hidden">
+                <input id="transactionAmount" name="transactionAmount" type="hidden" value="1">
+                <input id="description" name="description" type="hidden" value="Nome do Produto">
+                <input id="issuerId" name="issuerId" type="hidden" value="Issued ID">
+            
+                <button type="button" id="form-checkout__submit" onclick="createCardToken(event)">Pagar</button>
+              </form>
+        </div>
+    </section>
+</main>
+<footer>
+    <div class="footer_logo"><img id="horizontal_logo" th:src="@{/img/horizontal_logo.png}"></div>
+    <div class="footer_text">
+        <p>Developers Site:</p>
+        <p><a href="https://www.mercadopago.com/developers">https://www.mercadopago.com/developers</a></p>
+    </div>
+</footer>
+</body>
+</html>
